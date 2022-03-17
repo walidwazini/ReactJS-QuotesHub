@@ -3,8 +3,10 @@ import {
   FormControl, TextField,
 } from '@mui/material'
 import { makeStyles } from '@mui/styles'
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import DialogLeavingPage from '../Components/DialogLeavingPage'
+import useNavigatingAway from '../Hooks/useNavigatingAway'
 
 const NewQuote = () => {
   const classes = useStyles()
@@ -12,13 +14,19 @@ const NewQuote = () => {
   const [text, setText] = useState('')
   const [isEntering, setIsEntering] = useState(false)
   const navigate = useNavigate()
+  const [canShowDialogLeavingPage, setCanShowDialogLeavingPage] = useState(false)
+  const [showDialogLeavingPage, confirmNavigation, cancelNavigation] = useNavigatingAway(canShowDialogLeavingPage)
 
   const nameChangeHandler = ev => {
     setName(ev.target.value)
+    if (ev.target.value !== '') setCanShowDialogLeavingPage(true)
+    else setCanShowDialogLeavingPage(false)
   }
 
   const textChangeHandler = ev => {
     setText(ev.target.value)
+    if (ev.target.value !== '') setCanShowDialogLeavingPage(true)
+    else setCanShowDialogLeavingPage(false)
   }
 
   const submitHandler = ev => {
@@ -28,29 +36,11 @@ const NewQuote = () => {
     setText('')
     navigate('/quotes')
   }
+  const finishEnteringHandler = () => setIsEntering(false)
 
   const formFocusHandler = () => {
     console.log('Focus')
   }
-
-  const useJsx = (
-    <form onFocus={formFocusHandler} >
-      <label>Author</label>
-      <input
-        aria-label='author'
-        className={classes.jsxAuthorField}
-      />
-      <textarea
-        type='text'
-        className={classes.jsxTextField}
-      />
-      <Button
-        variant='contained'
-      >
-        Add Quote
-      </Button>
-    </form>
-  )
 
   const quoteForm = (
     <FormControl onFocus={formFocusHandler} >
@@ -79,6 +69,12 @@ const NewQuote = () => {
 
   return (
     <div className={classes.pageLayout} >
+      <DialogLeavingPage
+        showDialog={showDialogLeavingPage}
+        setShowDialog={setCanShowDialogLeavingPage}
+        confirmNavigation={confirmNavigation}
+        cancelNavigation={cancelNavigation}
+      />
       <Card className={classes.cardLayout} >
         {quoteForm}
       </Card>
@@ -121,5 +117,24 @@ const useStyles = makeStyles({
   },
   muiAuthorField: {}
 })
+
+const useJsx = (
+  <form >
+    <label>Author</label>
+    <input
+      aria-label='author'
+    // className={classes.jsxAuthorField}
+    />
+    <textarea
+      type='text'
+    // className={classes.jsxTextField}
+    />
+    <Button
+      variant='contained'
+    >
+      Add Quote
+    </Button>
+  </form>
+)
 
 export default NewQuote

@@ -2,23 +2,49 @@ import React from 'react'
 import { makeStyles } from '@mui/styles'
 import {
   Card, List, Button,
-  Typography, CardMedia, CardContent,
+  Typography, CardMedia, CardContent, Divider,
 } from '@mui/material'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+
+const sortQuotes = (quotes, ascending) => {
+  return quotes.sort((quoteA, quoteB) => {
+    if (ascending) {
+      return quoteA.id > quoteB.id ? 1 : -1;
+    } else {
+      return quoteA.id < quoteB.id ? 1 : -1;
+    }
+  });
+};
 
 const DUMMY_QUOTES = [
   { id: 'q1', author: 'Walid', text: 'Learning React is fun!' },
   { id: 'q2', author: 'Armin', text: 'Learning React is great!' },
-  { id: 'q3', author: 'Touka', text: 'Learning React is challenging!' }
+  { id: 'q3', author: 'Touka', text: 'Learning React is challenging!' },
+  { id: 'q4', author: 'Edward', text: 'Learning React is tough!' }
 ]
 
 const AllQuotes = () => {
   const classes = useStyles()
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  console.log(location)
+  const queryParams = new URLSearchParams(location.search)
+  const isSortingAscending = queryParams.get('sort') === 'asc'
+  const sortedQuotes = sortQuotes(DUMMY_QUOTES, isSortingAscending)
+
+  const changeSortingHandler = () => {
+    navigate(`/quotes?sort=${isSortingAscending ? 'desc' : 'asc'}`)
+  }
 
   return (
     <div className={classes.pageLayout} >
+      <Button variant='outlined' onClick={changeSortingHandler} >
+        Sort {isSortingAscending ? 'Descending ⬇️' : 'Ascending ⬆️'}
+      </Button>
+      <Divider />
       {
-        DUMMY_QUOTES.map(quote => (
+        sortedQuotes.map(quote => (
           <Card key={quote.id} className={classes.cardLayout} >
             <div className={classes.quoteWrapper} >
               <Typography variant='h5' className={classes.quoteText} >
