@@ -1,13 +1,16 @@
 import { Box, Card, Container, Typography } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { Route, useParams, Link, Routes } from 'react-router-dom'
+import Comments from '../Components/Comments'
 
 const QuoteDetail = () => {
   const DUMMY_QUOTES = [
     { id: 'q1', author: 'Walid', text: 'Learning React is fun!' },
     { id: 'q2', author: 'Armin', text: 'Learning React is great!' },
-    { id: 'q3', author: 'Touka', text: 'Learning React is challenging!' }
+    { id: 'q3', author: 'Touka', text: 'Learning React is challenging!' },
+    { id: 'q4', author: 'Edward', text: 'Learning React is tough!' }
+
   ]
   const classes = useStyles()
   const params = useParams()
@@ -27,6 +30,21 @@ const QuoteDetail = () => {
         <p> {quote.text} </p>
         <p> {params.quoteId} </p>
       </Card>
+      <Routes>
+        <Route
+          path={''}
+          element={
+            <div className={classes.loadComment} >
+              <Link to={`/quotes/${params.quoteId}/comments`} >
+                Load Comment
+              </Link>
+            </div>
+          }
+        />
+      </Routes>
+      <Routes>
+        <Route path={`comments`} element={<Comments />} />
+      </Routes>
     </div>
   )
 }
@@ -42,6 +60,14 @@ const useStyles = makeStyles({
     width: '35%',
     maxWidth: '40rem',
     padding: '3rem',
+  },
+  loadComment: {
+    margin: '3rem auto',
+    textAlign: 'center',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontWeight: 'bold'
   }
 })
 

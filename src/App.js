@@ -17,7 +17,7 @@ const App = () => {
           <Route path="/" element={<Navigate to='/quotes' />} />
           <Route path="/quotes" element={<AllQuotes />} />
           <Route path="/new-quote" element={<NewQuote />} />
-          <Route path="/quotes/:quoteId" element={<QuoteDetail />} />
+          <Route path="/quotes/:quoteId/*" element={<QuoteDetail />} />
           <Route
             path="*"
             element={
