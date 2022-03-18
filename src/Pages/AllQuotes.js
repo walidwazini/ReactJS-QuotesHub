@@ -1,10 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@mui/styles'
-// import {
-//   Card, List, Button,
-//   Typography, CardMedia, CardContent, Divider,
-// } from '@mui/material'
-// import { Link, useLocation, useNavigate } from 'react-router-dom'
+
 import QuoteList from '../Components/Quotes/QuoteList';
 
 const sortQuotes = (quotes, ascending) => {
