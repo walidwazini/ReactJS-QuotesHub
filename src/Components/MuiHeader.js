@@ -44,7 +44,7 @@ const MuiHeader = () => {
 
 const useStyles = makeStyles({
   appBar: {
-    backgroundColor: 'blue !important',
+    backgroundColor: '#055096 !important',
     height: '6.0rem',
   },
   toolBar: {

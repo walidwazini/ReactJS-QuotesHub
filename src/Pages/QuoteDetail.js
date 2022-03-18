@@ -1,4 +1,4 @@
-import { Box, Card, Container, Typography } from '@mui/material'
+import { Box, Card, Typography } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import React from 'react'
 import { Route, useParams, Link, Routes } from 'react-router-dom'
@@ -12,7 +12,6 @@ const QuoteDetail = () => {
     { id: 'q4', author: 'Edward', text: 'Learning React is tough!' }
 
   ]
-  // const match = useMatch()
   const classes = useStyles()
   const params = useParams()
   const quote = DUMMY_QUOTES.find(q => q.id === params.quoteId)
