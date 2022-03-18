@@ -12,9 +12,12 @@ const QuoteDetail = () => {
     { id: 'q4', author: 'Edward', text: 'Learning React is tough!' }
 
   ]
+  // const match = useMatch()
   const classes = useStyles()
   const params = useParams()
   const quote = DUMMY_QUOTES.find(q => q.id === params.quoteId)
+
+  // console.log(match.pathname)
 
   if (!quote) {
     return <p>No quote found</p>

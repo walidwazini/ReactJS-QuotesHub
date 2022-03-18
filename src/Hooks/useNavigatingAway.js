@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import NavigationBlocker from './NavigationBlocker'
+import NavigationBlocker from '../Components/NavigationBlocker'
 
 const useNavigatingAway = (canShowDialogPrompt) => {
   const navigate = useNavigate()

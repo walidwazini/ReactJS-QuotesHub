@@ -34,7 +34,11 @@ const AllQuotes = () => {
   const sortedQuotes = sortQuotes(DUMMY_QUOTES, isSortingAscending)
 
   const changeSortingHandler = () => {
-    navigate(`/quotes?sort=${isSortingAscending ? 'desc' : 'asc'}`)
+    navigate({
+      pathname: location.pathname,
+      search: `?sort=${isSortingAscending ? 'desc' : 'asc'}`
+    })
+    // navigate(`/quotes?sort=${isSortingAscending ? 'desc' : 'asc'}`)
   }
 
   return (
