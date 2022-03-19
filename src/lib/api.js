@@ -1,7 +1,5 @@
 const FIREBASE_DOMAIN = 'https://react-http-7483e-default-rtdb.asia-southeast1.firebasedatabase.app'
 
-import React from 'react'
-
 export const getAllQuotes = async () => {
   const response = await fetch(`${FIREBASE_DOMAIN}/quotes.json`)
   const data = await response.json()
