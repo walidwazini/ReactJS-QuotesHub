@@ -18,7 +18,7 @@ const sortQuotes = (quotes, ascending) => {
 const AllQuotes = () => {
   const classes = useStyles()
   const http = useHttp(getAllQuotes, true)
-  console.log(http.data)
+  // console.log(http.data)
 
   useEffect(() => {
     http.sendRequest()
