@@ -5,6 +5,7 @@ import QuoteList from '../Components/Quotes/QuoteList';
 import useHttp from '../Hooks/use-http';
 import { getAllQuotes } from '../lib/api';
 import { useMatch } from 'react-router-dom';
+import Loading from '../Components/Loading';
 
 const sortQuotes = (quotes, ascending) => {
   return quotes.sort((quoteA, quoteB) => {
@@ -26,9 +27,11 @@ const AllQuotes = () => {
   }, [http.sendRequest])
 
   if (http.status === 'pending') {
-    return <p>
-      Is loading...
-    </p>
+    return (
+      <div className='centered' >
+        <Loading />
+      </div>
+    )
   }
 
   if (http.error) {

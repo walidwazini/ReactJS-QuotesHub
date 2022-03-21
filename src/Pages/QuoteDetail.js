@@ -4,6 +4,7 @@ import React, { useEffect } from 'react'
 import { Route, useParams, Link, Routes } from 'react-router-dom'
 
 import Comments from '../Components/Comments'
+import Loading from '../Components/Loading'
 import HilightedQuote from '../Components/Quotes/HilightedQuote'
 import useHttp from '../Hooks/use-http'
 import { getSingleQuote } from '../lib/api'
@@ -22,9 +23,11 @@ const QuoteDetail = () => {
   }, [sendRequest, params.quoteId])
 
   if (status === 'pending') {
-    return <div className='centered' >
-      <p>Pending....</p>
-    </div>
+    return (
+      <div className='centered' >
+        <Loading />
+      </div>
+    )
   }
 
   if (error) {
@@ -41,13 +44,6 @@ const QuoteDetail = () => {
   return (
     <div className={classes.pageLayout} >
       <Box sx={{ height: '7rem' }} ></Box>
-      {/* <Card className={classes.cardLayout} >
-        <Typography variant='h3' >
-          Quote Detail
-        </Typography>
-        <p> {loadedQuote.text} </p>
-        <p> {loadedQuote.author} </p>
-      </Card> */}
       <HilightedQuote author={loadedQuote.author} text={loadedQuote.text} />
       <Routes>
         <Route
