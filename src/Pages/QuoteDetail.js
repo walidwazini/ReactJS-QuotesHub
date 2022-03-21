@@ -3,7 +3,7 @@ import { makeStyles } from '@mui/styles'
 import React, { useEffect } from 'react'
 import { Route, useParams, Link, Routes } from 'react-router-dom'
 
-import Comments from '../Components/Comments'
+import Comments from '../Components/Comments/Comments'
 import Loading from '../Components/Loading'
 import HilightedQuote from '../Components/Quotes/HilightedQuote'
 import useHttp from '../Hooks/use-http'
@@ -43,7 +43,7 @@ const QuoteDetail = () => {
 
   return (
     <div className={classes.pageLayout} >
-      <Box sx={{ height: '7rem' }} ></Box>
+      <Box sx={{ height: '3rem' }} ></Box>
       <HilightedQuote author={loadedQuote.author} text={loadedQuote.text} />
       <Routes>
         <Route
