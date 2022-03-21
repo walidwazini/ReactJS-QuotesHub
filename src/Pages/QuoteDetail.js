@@ -4,6 +4,7 @@ import React, { useEffect } from 'react'
 import { Route, useParams, Link, Routes } from 'react-router-dom'
 
 import Comments from '../Components/Comments'
+import HilightedQuote from '../Components/Quotes/HilightedQuote'
 import useHttp from '../Hooks/use-http'
 import { getSingleQuote } from '../lib/api'
 
@@ -40,13 +41,14 @@ const QuoteDetail = () => {
   return (
     <div className={classes.pageLayout} >
       <Box sx={{ height: '7rem' }} ></Box>
-      <Card className={classes.cardLayout} >
+      {/* <Card className={classes.cardLayout} >
         <Typography variant='h3' >
           Quote Detail
         </Typography>
         <p> {loadedQuote.text} </p>
         <p> {loadedQuote.author} </p>
-      </Card>
+      </Card> */}
+      <HilightedQuote author={loadedQuote.author} text={loadedQuote.text} />
       <Routes>
         <Route
           path={''}
@@ -73,11 +75,7 @@ const useStyles = makeStyles({
     alignItems: 'center !important',
     justifyContent: 'center'
   },
-  cardLayout: {
-    width: '35%',
-    maxWidth: '40rem',
-    padding: '3rem',
-  },
+
   loadComment: {
     margin: '3rem auto',
     textAlign: 'center',
